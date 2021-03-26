@@ -1,0 +1,5 @@
+.vscode
+env
+gomoku/__pycache__
+mct/__pycache__
+net/__pycache__
