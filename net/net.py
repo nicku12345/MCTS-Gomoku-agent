@@ -71,10 +71,15 @@ class LayerV(nn.Module):
         return torch.tanh(x)
 
 class Model:
-    def __init__(self,device = torch.device('cuda')):
-        self.layer1 = Layer1().to(device)
-        self.layerP = LayerP().to(device)
-        self.layerV = LayerV().to(device)
+    def __init__(self,device = None):
+        if not device:
+            self.layer1 = Layer1()
+            self.layerP = LayerP()
+            self.layerV = LayerV()
+        else:
+            self.layer1 = Layer1().to(device)
+            self.layerP = LayerP().to(device)
+            self.layerV = LayerV().to(device)
 
         self.optimizer1 = optim.SGD(self.layer1.parameters(), lr = 0.1)
         self.optimizerP = optim.SGD(self.layerP.parameters(), lr = 0.1)
@@ -134,9 +139,14 @@ class Model:
             batch_size = self.batch_size
         states,search_prob,values = self.batch(memory)
         
-        states = torch.FloatTensor(states).cuda()
-        search_prob = torch.FloatTensor(search_prob).cuda()
-        values = torch.FloatTensor(values).cuda()
+        if torch.cuda.is_available():
+            states = torch.FloatTensor(states).cuda()
+            search_prob = torch.FloatTensor(search_prob).cuda()
+            values = torch.FloatTensor(values).cuda()
+        else:
+            states = torch.FloatTensor(states)
+            search_prob = torch.FloatTensor(search_prob)
+            values = torch.FloatTensor(values)
 
         self.optimizer1.zero_grad()
         self.optimizerP.zero_grad()
@@ -175,7 +185,10 @@ class Model:
         Y = np.where(board == BLACK, 0, board)
         Y = np.where(Y != EMPTY, 1, Y)
 
-        state = torch.cuda.FloatTensor([[X,Y]])
+        if torch.cuda.is_available():
+            state = torch.cuda.FloatTensor([[X,Y]])
+        else:
+            state = torch.FloatTensor([[X,Y]])
         return state
 
     def evaluate_pv(self,game):
@@ -202,7 +215,8 @@ class Model:
 
 def main():
     print(f"Use cuda: {torch.cuda.is_available()}")
-    device = torch.device('cuda')
+    if torch.cuda.is_available():
+        device = torch.device('cuda')
 
     game = Game()
     game = game.take_action(5,5)
