@@ -2,7 +2,7 @@ from gomoku.game import Game
 from mct.mct import Node
 from mct.cache import Cache
 
-NUM_ITER = 300
+NUM_ITER = 100
 TRAIN_EVERY = 1
 MAX_ROUND = 30
 
@@ -18,7 +18,7 @@ def run_episode(cache, total = None, generation = 0):
         game.display()
         #print(f"Cache memory size: {cache.memory_size}")
         print(f"Total game: {total}")
-        print(f"Generation" {generation})
+        print(f"Generation {generation}")
         round += 1
     cache.save_completed_game()
 
