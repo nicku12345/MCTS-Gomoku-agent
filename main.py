@@ -2,8 +2,8 @@ from gomoku.game import Game
 from mct.mct import Node
 from mct.cache import Cache
 
-NUM_ITER = 100
-TRAIN_EVERY = 1
+NUM_ITER = 300
+TRAIN_EVERY = 100
 MAX_ROUND = 30
 
 def run_episode(cache, total = None, generation = 0):
