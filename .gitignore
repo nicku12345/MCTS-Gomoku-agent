@@ -3,3 +3,4 @@ env
 gomoku/__pycache__
 mct/__pycache__
 net/__pycache__
+config/__pycache__

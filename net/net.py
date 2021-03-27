@@ -15,10 +15,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 
 from gomoku.game import Game
-
-BLACK = 1
-WHITE = -1
-EMPTY = 0
+from config.config import *
 
 class Layer1(nn.Module):
     def __init__(self):
@@ -71,12 +68,14 @@ class LayerV(nn.Module):
         return torch.tanh(x)
 
 class Model:
-    def __init__(self,device = None):
-        if not device:
+    def __init__(self,device=None):
+        if not torch.cuda.is_available():
             self.layer1 = Layer1()
             self.layerP = LayerP()
             self.layerV = LayerV()
         else:
+            if not device:
+                device = torch.device("cuda")
             self.layer1 = Layer1().to(device)
             self.layerP = LayerP().to(device)
             self.layerV = LayerV().to(device)

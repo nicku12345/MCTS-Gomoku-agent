@@ -1,17 +1,5 @@
 import numpy as np
-
-WIDTH = 15
-LENGTH = 15
-
-BLACK = 1
-WHITE = -1
-EMPTY = 0
-
-CENTER = LENGTH//2,WIDTH//2
-
-O = u'\U0001F60E'
-X = u'\U0001F621'
-E = u'\U0001F5A4'
+from config.config import *
 
 class Game():
     def __init__(self, board = np.zeros(WIDTH*LENGTH).reshape(LENGTH,WIDTH).astype(int)):

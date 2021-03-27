@@ -1,0 +1,20 @@
+# main.py
+
+NUM_ITER = 300
+TRAIN_EVERY = 100
+MAX_ROUND = 30
+
+# game.py
+
+WIDTH = 15
+LENGTH = 15
+
+BLACK = 1
+WHITE = -1
+EMPTY = 0
+
+CENTER = LENGTH//2,WIDTH//2
+
+O = u'\U0001F60E'
+X = u'\U0001F621'
+E = u'\U0001F5A4'
