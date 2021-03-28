@@ -1,6 +1,6 @@
 # Description:
 
-Gomoku agent using reinforcement learning and Monte Carlo Tree Search. Training on-going in the cloud.
+Gomoku agent using reinforcement learning and Monte Carlo Tree Search. Training/testing currently going in the cloud.
 
 # References:
   1. https://www.nature.com/articles/nature24270
